@@ -15,7 +15,10 @@ function App() {
 
   // Initialize Socket.io connection
   useEffect(() => {
-    const newSocket = io('http://localhost:5000', {
+    // Use environment variable or default to localhost
+    const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000';
+    
+    const newSocket = io(serverUrl, {
       reconnection: true,
       reconnectionDelay: 1000,
       reconnectionDelayMax: 5000,
