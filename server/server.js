@@ -20,6 +20,15 @@ const io = socketIo(server, {
 app.use(cors());
 app.use(express.static('../client/build'));
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', server: 'HeyBuddy running' });
+});
+
+app.get('/', (req, res) => {
+  res.json({ message: 'HeyBuddy Server v1.0', status: 'running' });
+});
+
 // Store active chat rooms
 const chatRooms = new Map();
 const userSessions = new Map();
