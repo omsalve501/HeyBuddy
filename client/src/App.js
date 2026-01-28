@@ -31,12 +31,12 @@ function App() {
     });
 
     newSocket.on('connect', () => {
-      console.log('Connected to server');
+      console.log('✅ Connected to server successfully!');
       setIsConnected(true);
     });
 
-    newSocket.on('disconnect', () => {
-      console.log('Disconnected from server');
+    newSocket.on('disconnect', (reason) => {
+      console.log('❌ Disconnected from server. Reason:', reason);
       setIsConnected(false);
       setUsername('');
       setMessages([]);
@@ -44,11 +44,16 @@ function App() {
     });
 
     newSocket.on('connect_error', (error) => {
-      console.error('Connection error:', error);
+      console.error('🔴 Connection error:', error?.message || error);
+      console.error('Error details:', error);
     });
 
     newSocket.on('error', (error) => {
-      console.error('Socket error:', error);
+      console.error('🔴 Socket error:', error);
+    });
+
+    newSocket.on('connect_attempt', () => {
+      console.log('🔄 Attempting to connect...');
     });
 
     newSocket.on('receive_message', (message) => {
