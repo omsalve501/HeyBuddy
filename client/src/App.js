@@ -25,9 +25,11 @@ function App() {
       reconnectionDelay: 1000,
       reconnectionDelayMax: 5000,
       reconnectionAttempts: Infinity,
-      transports: ['websocket', 'polling'],
+      transports: ['polling', 'websocket'],  // polling FIRST for cellular networks
       secure: true,
-      rejectUnauthorized: false
+      rejectUnauthorized: false,
+      rememberUpgrade: false,
+      forceNew: true
     });
 
     newSocket.on('connect', () => {
