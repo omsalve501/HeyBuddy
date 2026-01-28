@@ -18,11 +18,14 @@ function App() {
     // Use global config, environment variable, or default to localhost
     const serverUrl = window.REACT_APP_SERVER_URL || process.env.REACT_APP_SERVER_URL || 'http://localhost:5000';
     
+    console.log('Attempting to connect to:', serverUrl);
+    
     const newSocket = io(serverUrl, {
       reconnection: true,
       reconnectionDelay: 1000,
       reconnectionDelayMax: 5000,
-      reconnectionAttempts: 5
+      reconnectionAttempts: 5,
+      transports: ['websocket', 'polling']
     });
 
     newSocket.on('connect', () => {
@@ -36,6 +39,14 @@ function App() {
       setUsername('');
       setMessages([]);
       setRoomStatus(null);
+    });
+
+    newSocket.on('connect_error', (error) => {
+      console.error('Connection error:', error);
+    });
+
+    newSocket.on('error', (error) => {
+      console.error('Socket error:', error);
     });
 
     newSocket.on('receive_message', (message) => {
