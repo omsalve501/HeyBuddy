@@ -13,11 +13,15 @@ const io = socketIo(server, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
-    credentials: false
+    credentials: false,
+    allowEIO3: true
   },
-  transports: ['websocket', 'polling'],
+  transports: ['polling', 'websocket'],
   pingInterval: 25000,
-  pingTimeout: 20000
+  pingTimeout: 20000,
+  upgradeTimeout: 10000,
+  maxHttpBufferSize: 1e6,
+  serveClient: false
 });
 
 app.use(cors());

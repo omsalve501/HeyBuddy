@@ -22,14 +22,23 @@ function App() {
     
     const newSocket = io(serverUrl, {
       reconnection: true,
-      reconnectionDelay: 1000,
-      reconnectionDelayMax: 5000,
+      reconnectionDelay: 2000,
+      reconnectionDelayMax: 10000,
       reconnectionAttempts: Infinity,
-      transports: ['polling', 'websocket'],  // polling FIRST for cellular networks
+      transports: ['polling', 'websocket'],
       secure: true,
       rejectUnauthorized: false,
       rememberUpgrade: false,
-      forceNew: true
+      forceNew: true,
+      upgrade: true,
+      timestampParam: 't',
+      transportOptions: {
+        polling: {
+          extraHeaders: {
+            'X-Client-Type': 'mobile-app'
+          }
+        }
+      }
     });
 
     newSocket.on('connect', () => {
