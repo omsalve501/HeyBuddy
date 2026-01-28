@@ -5,10 +5,20 @@ const cors = require('cors');
 
 const app = express();
 const server = http.createServer(app);
+
+// Get frontend URL from environment or use localhost
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
+
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"]
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:5000",
+      "https://omsalve501.github.io",
+      FRONTEND_URL
+    ],
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 
