@@ -1,0 +1,17 @@
+{
+  "name": "heybuddy",
+  "version": "1.0.0",
+  "description": "Real-time chat application with 2 users per room",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "bash start.sh",
+    "server": "cd server && npm start",
+    "client": "cd client && npm start"
+  },
+  "keywords": ["chat", "socket.io", "real-time"],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
