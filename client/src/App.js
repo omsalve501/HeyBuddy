@@ -15,8 +15,8 @@ function App() {
 
   // Initialize Socket.io connection
   useEffect(() => {
-    // Use environment variable or default to localhost
-    const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000';
+    // Use global config, environment variable, or default to localhost
+    const serverUrl = window.REACT_APP_SERVER_URL || process.env.REACT_APP_SERVER_URL || 'http://localhost:5000';
     
     const newSocket = io(serverUrl, {
       reconnection: true,
