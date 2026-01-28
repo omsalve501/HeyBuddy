@@ -11,14 +11,9 @@ const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
 
 const io = socketIo(server, {
   cors: {
-    origin: [
-      "http://localhost:3000",
-      "http://localhost:5000",
-      "https://omsalve501.github.io",
-      FRONTEND_URL
-    ],
+    origin: "*",
     methods: ["GET", "POST"],
-    credentials: true
+    credentials: false
   }
 });
 
